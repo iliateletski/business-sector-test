@@ -1,0 +1,34 @@
+.pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    flex: 0 0 auto;
+}
+
+.btn_go {
+    font-size: 24px;
+    line-height: 33px;
+    background-color: transparent;
+    border: none;
+    color: #474955;
+}
+
+.pagination_item {
+    color: #474955;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    font-style: italic;
+    border: none;
+    background-color: transparent;
+}
+
+.pagination_item +.pagination_item {
+    margin-left: 14px;
+}
+
+.pagination_item .active {
+    color: #7EBC3C;
+}
