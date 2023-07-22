@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/business-sector-test/static/css/main.dc223157.css",
+    "main.js": "/business-sector-test/static/js/main.f1108811.js",
+    "index.html": "/business-sector-test/index.html",
+    "main.dc223157.css.map": "/business-sector-test/static/css/main.dc223157.css.map",
+    "main.f1108811.js.map": "/business-sector-test/static/js/main.f1108811.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dc223157.css",
+    "static/js/main.f1108811.js"
+  ]
+}
