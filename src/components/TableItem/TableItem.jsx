@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./TableItem.module.css"
 
-const TableItem = () => {
+const TableItem = ({post}) => {
     
     return (
         <tr className={styles.table_tem}>
-            <td className={styles.table_tem_td}></td>
-            <td className={styles.table_tem_td}></td>
-            <td className={styles.table_tem_td}></td>
+            <td className={styles.table_tem_td}>{post.id}</td>
+            <td className={styles.table_tem_td}>{post.title}</td>
+            <td className={styles.table_tem_td}>{post.body}</td>
         </tr>
     )
 }

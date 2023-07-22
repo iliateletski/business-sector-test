@@ -29,6 +29,6 @@
     margin-left: 14px;
 }
 
-.pagination_item .active {
+.pagination_item.active {
     color: #7EBC3C;
 }
