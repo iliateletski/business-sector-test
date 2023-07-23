@@ -13,6 +13,8 @@
     text-transform: uppercase;
 }
 
+
+
 .header_th:nth-child(2) {
     width: 50%;
 }
@@ -29,8 +31,33 @@
     color: #fff;
     border: none;
     background-color: transparent;
+    display: flex;
+    align-items: center;
 }
 
 .header_btn_text {
     margin-right: 2vw;
 }
+
+.header_btn_icon {
+    width: 12px;
+    height: 7px;
+}
+
+@media(max-width: 590px) {
+    .header_btn_text {
+        margin-right: 1vw;
+    }
+
+    .header_btn_icon {
+        width: 9px;
+        height: 5px;
+    }
+}
+
+@media(max-width: 590px) {
+    .header_btn {
+        font-size: 12px;
+    }
+}
+

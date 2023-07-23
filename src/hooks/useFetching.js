@@ -1,12 +1,11 @@
 import { useState } from "react"
 
 export const useFetching = (collback) => {
-    const[isLoading, setIsLosding] = useState(false)
+    const[isLoading, setIsLosding] = useState(true)
     const[error, setError] = useState('')
 
     const fetching = async () => {
         try {
-            setIsLosding(true)
             await collback()
         } catch(e) {
             setError(e.message)

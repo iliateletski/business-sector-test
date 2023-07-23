@@ -1,14 +1,18 @@
 import React from "react"
+import { useDispatch } from "react-redux"
+import { setQueryAction } from "../../store/reducers/filterAndSortReducer"
 import styles from "./Search.module.css"
 
-const Search = ({setFilter}) => {
+const Search = () => {
 
+    const dispatch = useDispatch()
+    
     return (
         <div className={styles.search_box}>
             <input 
                 className={styles.search_input} 
                 placeholder="Поиск"
-                onChange={(e) => setFilter((prev) => ({...prev, query: e.target.value}))}
+                onChange={(e) => dispatch(setQueryAction(e.target.value))}
             />
             <span className={styles.search_icon_box}>
                 <svg className={styles.search_icon} viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">

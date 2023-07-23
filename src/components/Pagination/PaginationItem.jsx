@@ -1,18 +1,23 @@
 import React from "react"
 import styles from "./Pagination.module.css"
+import { NavLink } from "react-router-dom"
 
-const PaginationItem = ({onClick, active, value, children}) => {
-    const classes = [styles.pagination_item]
-    if(active) classes.push(styles.active)
+const PaginationItem = ({children, to}) => {
 
     return (
-        <button 
-            className={classes.join(' ')}
-            value={value}
-            onClick={(e) => onClick(e.target.value)}
-        >
-            {children}
-        </button>
+        <li className={styles.pagination_item}>
+            {
+                typeof(children) === 'number'
+                ? <NavLink
+                className={({isActive}) => isActive ? styles.active : ''}
+                to={`/${to}`}
+            >
+                {children}
+                </NavLink>
+                : <span>{children}</span>
+            }
+            
+        </li>
     )
 }
 

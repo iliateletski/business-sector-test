@@ -7,12 +7,17 @@
     flex: 0 0 auto;
 }
 
-.btn_go {
+.link_go {
     font-size: 24px;
     line-height: 33px;
     background-color: transparent;
     border: none;
     color: #474955;
+}
+
+.pagination_items {
+    display: flex;
+    padding: 0;
 }
 
 .pagination_item {
@@ -23,12 +28,37 @@
     font-style: italic;
     border: none;
     background-color: transparent;
+    user-select: none;
 }
 
 .pagination_item +.pagination_item {
     margin-left: 14px;
 }
 
-.pagination_item.active {
+.active {
     color: #7EBC3C;
+}
+
+@media(max-width: 590px) {
+    .link_go {
+        font-size: 21px;
+    }
+
+    .pagination_item {
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 420px) {
+    .pagination{
+        padding: 0;
+    }
+    
+    .link_go {
+        font-size: 14px;
+    }
+
+    .pagination_item {
+        font-size: 12px;
+    }
 }

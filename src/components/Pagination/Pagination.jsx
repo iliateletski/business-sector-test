@@ -1,64 +1,44 @@
 import React from "react"
 import styles from "./Pagination.module.css"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { getPageCount } from "../../utils"
-import { setPageAction } from "../../store/reducers/paginationReducer"
 import PaginationItem from "./PaginationItem"
-
+import { useParams, Link} from "react-router-dom"
 
 const Pagination = () => {
 
-    const dispatch = useDispatch()
-    const totalCount = useSelector(state => state.totalCount)
-    const limit = useSelector(state => state.limit)
-    const page = useSelector(state => state.page)
-    const{pages, pageCount} = getPageCount(totalCount, limit)
-
-    const go = (value) => {
-        if(value === 'forward' && page < pageCount) {
-            dispatch(setPageAction(page + 1))
-            return
-        }
-        if(value === 'back' && page > 1) {
-            dispatch(setPageAction(page - 1))
-            return
-        }
-        if(typeof value === 'number') {
-            dispatch(setPageAction(value))
-        }
-    }
-    
-    console.log(page)
+    const totalCount = useSelector(state => state.pagination.totalCount)
+    const limit = useSelector(state => state.pagination.limit)
+    const {page} = useParams()
+    const{pages, pageCount} = getPageCount(totalCount, limit, +page)
 
     return (
         <div className={styles.pagination}>
-            <button 
-                className={styles.btn_go}
-                value='back'
-                onClick={(e) => go(e.target.value)}
+            <Link 
+                className={styles.link_go}
+                to={page > 1 ? `/${page - 1}` : `/${page}`}
             >
                 Назад
-            </button>
-                <div className={styles.pagination_items}>
-                    {pages.map((currentPage, i) => 
-                        <PaginationItem
-                            key={i}
-                            value={currentPage}
-                            active={currentPage == page}
-                            onClick={(value) => go(+value)}
+            </Link>
+                <ul className={styles.pagination_items}>
+                    {pages.map((currentPage) =>  
+                       <PaginationItem
+                            key={currentPage}
+                            to={currentPage}
                         >
                             {currentPage}
                         </PaginationItem>
                     )}
-                </div>
-            <button 
-                className={styles.btn_go}
-                value='forward'
-                onClick={(e) => go(e.target.value)}
+                </ul>
+            <Link
+                className={styles.link_go} 
+                to={page < pageCount ? `/${+page + 1}` : `/${page}`}
             >
                 Далее
-            </button>
+            </Link>
+            
         </div>
     )
 }
+
 export default Pagination
