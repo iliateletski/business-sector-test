@@ -1,63 +1,61 @@
 .header {
-    background-color: #474955;
-    box-shadow: 0px 4px 27px 0px #E6E7EAC7;
+	background-color: #474955;
+	box-shadow: 0px 4px 27px 0px #e6e7eac7;
+	height: max-content;
 }
 
 .header_th {
-    padding: 19px 0 16px;
-    text-align-last: left;
+	padding: 19px 0 16px;
+	text-align-last: left;
 }
 
 .header_th:nth-child(1) {
-    width: 10%;
-    text-transform: uppercase;
+	width: 10%;
+	text-transform: uppercase;
 }
 
-
-
 .header_th:nth-child(2) {
-    width: 50%;
+	width: 50%;
 }
 
 .header_th:nth-child(3) {
-    width: 40%;
+	width: 40%;
 }
 
 .header_btn {
-    margin-left: 25%;
-    font-size: 14px;    
-    font-weight: 600;
-    line-height: 19px;
-    color: #fff;
-    border: none;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
+	margin-left: 25%;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #fff;
+	border: none;
+	background-color: transparent;
+	display: flex;
+	align-items: center;
 }
 
 .header_btn_text {
-    margin-right: 2vw;
+	margin-right: 2vw;
 }
 
 .header_btn_icon {
-    width: 12px;
-    height: 7px;
+	width: 12px;
+	height: 7px;
 }
 
-@media(max-width: 590px) {
-    .header_btn_text {
-        margin-right: 1vw;
-    }
+@media (max-width: 590px) {
+	.header_btn_text {
+		margin-right: 1vw;
+	}
 
-    .header_btn_icon {
-        width: 9px;
-        height: 5px;
-    }
+	.header_btn_icon {
+		width: 9px;
+		height: 5px;
+	}
 }
 
-@media(max-width: 590px) {
-    .header_btn {
-        font-size: 12px;
-    }
+@media (max-width: 590px) {
+	.header_btn {
+		font-size: 12px;
+	}
 }
-

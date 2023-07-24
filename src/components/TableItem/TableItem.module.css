@@ -1,5 +1,9 @@
-.table_tem_td{
-    border: 1px solid #E3E6EC;
-    padding: 10px;
-    height: 56px;
+.table_item_td {
+	border: 1px solid #e3e6ec;
+	padding: 10px;
+	height: 56px;
+}
+
+.table_item_td:first-child {
+	text-align: center;
 }

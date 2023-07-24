@@ -1,59 +1,50 @@
-import React, { useEffect } from "react"
-import { useNavigate} from "react-router-dom"
-import TableItem from "../TableItem/TableItem"
-import TableHeader from "../TableHeader/TableHeader"
-import styles from "./Table.module.css"
-import { useParams } from "react-router-dom"
-import { fetchPosts } from "../../http"
-import { useFetching } from "../../hooks/useFetching"
-import { useDispatch, useSelector } from "react-redux"
-import { setTotalCountAction } from "../../store/reducers/paginationReducer"
-import { useFilterPosts } from "../../hooks/useFilterPosts"
-import { setPostsAction } from "../../store/reducers/postsReducer"
-import { setSortParamAction } from "../../store/reducers/filterAndSortReducer"
-
+import React, { useEffect, useState } from 'react'
+import TableItem from '../TableItem/TableItem'
+import TableHeader from '../TableHeader/TableHeader'
+import styles from './Table.module.css'
+import { useParams } from 'react-router-dom'
+import { fetchPosts } from '../../http'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSortParam, setTotalCount } from '../../store/appReducer'
+import { filterAndSort } from '../../utils/index'
+import { LIMIT } from '../../utils/consts'
+import Preloader from '../Preloader/Preloader'
 
 const Table = () => {
+	const [posts, setPosts] = useState([])
+	const [isPostsLoading, setIsPostsLoading] = useState(true)
+	const { page } = useParams()
+	const dispatch = useDispatch()
+	const query = useSelector(state => state.query)
+	const sortParam = useSelector(state => state.sortParam)
+	const sortedAndFilteredPosts = filterAndSort(posts, sortParam, query)
 
-    const{page} = useParams()
-    const dispatch = useDispatch()
-    const query = useSelector(state => state.filterAndSort.query)
-    const sortParam = useSelector(state => state.filterAndSort.sortParam)
-    const limit = useSelector(state => state.pagination.limit)
-    const posts = useSelector(state => state.posts.posts)
-    const navigate = useNavigate()
-    const sortedAndFilteredPosts = useFilterPosts(posts, sortParam, query)
-    
-    const[fetching, isPostsLoading, postsError] = useFetching( async () => {
-        const{data, headers} = await fetchPosts(page, limit)
-        dispatch(setPostsAction(data))
-        dispatch(setTotalCountAction(headers['x-total-count']))
-        navigate(`/${page}`)
-    })
+	useEffect(() => {
+		fetchPosts(page, LIMIT)
+			.then(({ data, headers }) => {
+				setPosts(data)
+				dispatch(setTotalCount(headers['x-total-count']))
+			})
+			.catch(e => alert(e.message))
+			.finally(setIsPostsLoading(false))
+	}, [page, dispatch])
 
-    useEffect(() => {
-        fetching()
-    }, [page])
-
-    return (
-        <table className={styles.table}>
-            <TableHeader 
-                onClick={(value) => dispatch(setSortParamAction(value))}
-            />
-            <tbody 
-                className={styles.table_body}
-            >
-                {
-                    sortedAndFilteredPosts.map((post) => 
-                        <TableItem
-                            key={post.id}
-                            post={post}
-                        />
-                    )
-                }
-            </tbody>
-        </table>
-        )
+	return (
+		<div className={styles.table_box}>
+			<table className={styles.table}>
+				<TableHeader onClick={value => dispatch(setSortParam(value))} />
+				<tbody className={styles.table_body}>
+					{isPostsLoading ? (
+						<Preloader />
+					) : (
+						sortedAndFilteredPosts.map(post => (
+							<TableItem key={post.id} post={post} />
+						))
+					)}
+				</tbody>
+			</table>
+		</div>
+	)
 }
 
 export default Table
