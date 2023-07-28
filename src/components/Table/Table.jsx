@@ -1,18 +1,21 @@
+import { fetchPosts } from 'http'
 import React, { useEffect, useState } from 'react'
-import TableItem from '../TableItem/TableItem'
-import TableHeader from '../TableHeader/TableHeader'
-import styles from './Table.module.css'
-import { useParams } from 'react-router-dom'
-import { fetchPosts } from '../../http'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSortParam, setTotalCount } from '../../store/appReducer'
-import { filterAndSort } from '../../utils/index'
-import { LIMIT } from '../../utils/consts'
+import { useParams } from 'react-router-dom'
+import { filterAndSort } from 'utils'
+
+import { LIMIT } from 'utils/consts'
+
+import { setSortParam, setTotalCount } from 'store/appReducer'
+
 import Preloader from '../Preloader/Preloader'
+import TableHeader from '../TableHeader/TableHeader'
+import TableItem from '../TableItem/TableItem'
+import styles from './Table.module.css'
 
 const Table = () => {
 	const [posts, setPosts] = useState([])
-	const [isPostsLoading, setIsPostsLoading] = useState(true)
+	const [isPostsLoading, setIsPostsLoading] = useState(false)
 	const { page } = useParams()
 	const dispatch = useDispatch()
 	const query = useSelector(state => state.query)
@@ -20,13 +23,14 @@ const Table = () => {
 	const sortedAndFilteredPosts = filterAndSort(posts, sortParam, query)
 
 	useEffect(() => {
+		setIsPostsLoading(true)
 		fetchPosts(page, LIMIT)
 			.then(({ data, headers }) => {
 				setPosts(data)
 				dispatch(setTotalCount(headers['x-total-count']))
 			})
 			.catch(e => alert(e.message))
-			.finally(setIsPostsLoading(false))
+			.finally(() => setIsPostsLoading(false))
 	}, [page, dispatch])
 
 	return (

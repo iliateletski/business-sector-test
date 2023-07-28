@@ -1,6 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setQuery } from '../../store/appReducer'
+
+import { setQuery } from 'store/appReducer'
+
 import styles from './Search.module.css'
 
 const Search = () => {

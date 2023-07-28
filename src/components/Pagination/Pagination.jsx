@@ -1,11 +1,13 @@
 import React from 'react'
-import styles from './Pagination.module.css'
 import { useSelector } from 'react-redux'
-import { getPaginationList } from '../../utils'
+import { Link, useParams } from 'react-router-dom'
+
+import { TABLE_ROUTE } from 'utils/consts'
+import { LIMIT } from 'utils/consts'
+import { getPaginationList } from 'utils/index'
+
+import styles from './Pagination.module.css'
 import PaginationItem from './PaginationItem'
-import { useParams, Link } from 'react-router-dom'
-import { TABLE_ROUTE } from '../../utils/consts'
-import { LIMIT } from '../../utils/consts'
 
 const Pagination = () => {
 	const totalCount = useSelector(state => state.totalCount)

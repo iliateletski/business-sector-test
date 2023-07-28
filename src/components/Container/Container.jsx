@@ -1,8 +1,9 @@
 import React from 'react'
-import styles from './Container.module.css'
+import { Outlet } from 'react-router-dom'
+
 import Pagination from '../Pagination/Pagination'
 import Search from '../Search/Search'
-import { Outlet } from 'react-router-dom'
+import styles from './Container.module.css'
 
 const Container = () => {
 	return (
