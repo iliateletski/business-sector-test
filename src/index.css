@@ -1,3 +1,5 @@
+@import url(../node_modules/normalize.css/normalize.css);
+
 *,
 *::after,
 *::before {
@@ -6,12 +8,12 @@
 
 html,
 body,
-#root {
+.root {
 	max-height: max-content;
 	height: 100%;
 }
 
-#root {
+.root {
 	padding: 10px;
 }
 
@@ -21,7 +23,6 @@ body {
 	font-weight: 500;
 	line-height: 18px;
 	color: #474955;
-	margin: 0;
 }
 
 button {

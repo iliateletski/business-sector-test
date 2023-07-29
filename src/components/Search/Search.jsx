@@ -1,6 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setQuery } from '../../store/appReducer'
+
+import { setQuery } from 'store/appReducer'
+
 import styles from './Search.module.css'
 
 const Search = () => {
@@ -11,7 +13,7 @@ const Search = () => {
 			<input
 				className={styles.search_input}
 				placeholder='Поиск'
-				onChange={e => dispatch(setQuery(e.target.value))}
+				onInput={e => dispatch(setQuery(e.target.value))}
 			/>
 			<span className={styles.search_icon_box}>
 				<svg

@@ -45,9 +45,7 @@ export const filterAndSort = (posts, sortParam, query) => {
 	if (sortParam) {
 		return typeof filtered[0][sortParam] === 'number'
 			? [...filtered].sort((a, b) => b[sortParam] - a[sortParam])
-			: [...filtered].sort((a, b) =>
-					a[sortParam].localeCompare(b[sortParam])
-			  )
+			: [...filtered].sort((a, b) => a[sortParam].localeCompare(b[sortParam]))
 	}
 
 	return filtered

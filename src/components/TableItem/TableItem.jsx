@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styles from './TableItem.module.css'
 
 const TableItem = ({ post }) => {
