@@ -1,4 +1,5 @@
 import { filterAndSort } from 'utils/index'
+import { getPaginationList } from 'utils/index'
 
 const testPosts = [
 	{
@@ -49,5 +50,32 @@ describe('filterAndSort', () => {
 		expect(filterAndSort(testPosts, 'id', 'title a')).toEqual(
 			sortedByIdAndFiltered
 		)
+	})
+})
+
+test('getPaginationList', () => {
+	expect(getPaginationList(100, 10, 1)).toEqual({
+		pages: [1, 2, 3, 4, 5],
+		pagesTotal: 10
+	})
+	expect(getPaginationList(100, 10, 4)).toEqual({
+		pages: [1, '...', 3, 4, 5, 6],
+		pagesTotal: 10
+	})
+	expect(getPaginationList(100, 10, 7)).toEqual({
+		pages: [1, '...', 6, 7, 8, 9],
+		pagesTotal: 10
+	})
+	expect(getPaginationList(100, 10, 10)).toEqual({
+		pages: [1, '...', 7, 8, 9, 10],
+		pagesTotal: 10
+	})
+	expect(getPaginationList(100, 10, 12)).toEqual({
+		pages: [1, 2, 3, 4, 5],
+		pagesTotal: 10
+	})
+	expect(getPaginationList(100, 10, -1)).toEqual({
+		pages: [1, 2, 3, 4, 5],
+		pagesTotal: 10
 	})
 })
