@@ -1,10 +1,10 @@
 import { fetchPosts } from 'http'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { filterAndSort } from 'utils'
 
-import { LIMIT } from 'utils/consts'
+import { LIMIT, TABLE_ROUTE } from 'utils/consts'
 
 import { setSortParam, setTotalCount } from 'store/appReducer'
 
@@ -21,17 +21,22 @@ const Table = () => {
 	const query = useSelector(state => state.query)
 	const sortParam = useSelector(state => state.sortParam)
 	const sortedAndFilteredPosts = filterAndSort(posts, sortParam, query)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		setIsPostsLoading(true)
 		fetchPosts(page, LIMIT)
 			.then(({ data, headers }) => {
-				setPosts(data)
-				dispatch(setTotalCount(headers['x-total-count']))
+				if (page > headers['x-total-count'] / LIMIT) {
+					navigate(`${TABLE_ROUTE}/1`)
+				} else {
+					setPosts(data)
+					dispatch(setTotalCount(headers['x-total-count']))
+				}
 			})
 			.catch(e => alert(e.message))
 			.finally(() => setIsPostsLoading(false))
-	}, [page, dispatch])
+	}, [page, dispatch, navigate])
 
 	return (
 		<div className={styles.table_box}>

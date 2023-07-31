@@ -1,28 +1,21 @@
 export const getPaginationList = (totalCount, limit, curentPage) => {
-	const pageCount = Math.ceil(totalCount / limit)
-	const pages = []
+	const pagesTotal = Math.ceil(totalCount / limit)
+	const pages = [1]
 
-	if (pageCount > 5) {
-		if (curentPage > 3) {
-			const startI = curentPage - 1
-			for (let i = startI; i < curentPage + 3; i++) {
-				if (i === startI) pages.push(1, '...')
-				pages.push(i)
-				if (i === pageCount) break
-			}
-		} else {
-			for (let i = 1; i <= 5; i++) {
-				pages.push(i)
-				if (i === pageCount) break
-			}
-		}
+	if (curentPage > pagesTotal) {
+		pages.push(2, 3, 4, 5)
 	} else {
-		for (let i = 1; i <= pageCount; i++) {
-			pages.push(i)
+		let startPage = 2
+		if (pagesTotal > 5 && curentPage > 3) {
+			pages.push('...')
+			startPage = Math.min(curentPage - 1, pagesTotal - 3)
+		}
+		const endPage = startPage + 4
+		for (startPage; startPage !== endPage; startPage++) {
+			pages.push(startPage)
 		}
 	}
-
-	return { pages, pageCount }
+	return { pages, pagesTotal }
 }
 
 const check = (value, query) => {
