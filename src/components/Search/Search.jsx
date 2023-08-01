@@ -9,9 +9,10 @@ const Search = () => {
 	const dispatch = useDispatch()
 
 	return (
-		<div className={styles.search_box}>
+		<div className={styles.search_box} data-testid='search'>
 			<input
 				className={styles.search_input}
+				data-testid='input'
 				placeholder='Поиск'
 				onInput={e => dispatch(setQuery(e.target.value))}
 			/>
