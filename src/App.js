@@ -7,15 +7,17 @@ import { TABLE_ROUTE } from 'utils/consts'
 
 function App() {
 	return (
-		<BrowserRouter basename='/business-sector-test'>
-			<Routes>
-				<Route path='/' element={<Container />}>
-					<Route index element={<Navigate to={`${TABLE_ROUTE}/1`} />} />
-					<Route path={`${TABLE_ROUTE}/:page`} element={<Table />} />
-					<Route path='*' element={<Navigate to={`${TABLE_ROUTE}/1`} />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
+		<div>
+			<BrowserRouter basename='/business-sector-test'>
+				<Routes>
+					<Route path='/' element={<Container />}>
+						<Route index element={<Navigate to={`${TABLE_ROUTE}/1`} />} />
+						<Route path={`${TABLE_ROUTE}/:page`} element={<Table />} />
+						<Route path='*' element={<Navigate to={`${TABLE_ROUTE}/1`} />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</div>
 	)
 }
 
