@@ -15,7 +15,7 @@ const Pagination = () => {
 	const { pages, pageCount } = getPaginationList(totalCount, LIMIT, +page)
 
 	return (
-		<div className={styles.pagination}>
+		<div className={styles.pagination} data-testid='Pagination'>
 			<Link
 				className={styles.link_go}
 				to={`${TABLE_ROUTE}/${page > 1 ? page - 1 : page}`}

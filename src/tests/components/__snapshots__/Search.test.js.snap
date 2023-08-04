@@ -7,7 +7,6 @@ exports[`Search component Snapshot test 1`] = `
 >
   <input
     class="search_input"
-    data-testid="input"
     placeholder="Поиск"
   />
   <span

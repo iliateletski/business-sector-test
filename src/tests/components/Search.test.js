@@ -25,7 +25,7 @@ describe('Search component', () => {
 
 		render(<Search />)
 
-		const input = screen.getByTestId('input')
+		const input = screen.getByRole('textbox')
 		userEvent.type(input, 'good')
 
 		expect(dispatch).toBeCalledTimes(4)
